@@ -5,6 +5,8 @@ OBJ = $(SRC:.c=.o)
 
 CFLAGS = -Wall
 
+PREFIX ?= /usr/local
+
 all: options server client
 
 options:
@@ -23,9 +25,9 @@ clean:
 	rm -f server client $(OBJ)
 
 install:
-	cp -f server /usr/local/bin/xopen
-	cp -f client /usr/local/bin/xopen-client
+	install -Dm755 server $(DESTDIR)$(PREFIX)/bin/xopen
+	install -Dm755 client $(DESTDIR)$(PREFIX)/bin/xopen-client
 
 uninstall:
-	rm -f /usr/local/bin/xopen
-	rm -f /usr/local/bin/xopen-client
+	rm -f $(PREFIX)/bin/xopen
+	rm -f $(PREFIX)/bin/xopen-client
